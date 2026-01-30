@@ -1,5 +1,4 @@
 # aws-secure-vpc-terraform
-Secure AWS VPC architecture built with Terraform, featuring public and private subnets, NAT Gateway, IAM roles, remote state management, and security best practices.
 Secure, multi-environment AWS VPC architecture built with Terraform
 
 This repository demonstrates a production-grade AWS networking foundation using Terraform Infrastructure as Code (IaC). It implements isolated dev, staging, and prod environments, each with its own VPC, subnets, NAT gateway, and remote state management.
@@ -107,3 +106,25 @@ Visual Studio Code
 Richard Addae
 Cloud & Security Engineering Focus
 Terraform • AWS • Infrastructure as Code
+
+## Operations (CloudWatch)
+
+After deployment, Terraform creates an operations dashboard and exposes it as an output:
+
+- `ops_dashboard_name` = **aws-secure-vpc-terraform-dev-ops-dashboard**
+
+Open it in AWS Console:
+CloudWatch → Dashboards → **aws-secure-vpc-terraform-dev-ops-dashboard**
+
+### Monitoring coverage
+This dashboard includes:
+- ASG CPU utilization
+- ASG desired vs in-service capacity
+- ALB request count
+- ALB target response time
+- ALB 4XX/5XX (ELB + Target)
+- ALB healthy vs unhealthy hosts
+- Alarm status widget (alarms tied directly to the dashboard)
+
+### Screenshot
+![Operations Dashboard](docs/screenshots/ops-dashboard.png)
