@@ -128,3 +128,12 @@ This dashboard includes:
 
 ### Screenshot
 ![Operations Dashboard](docs/screenshots/ops-dashboard.png)
+
+## Quick Test
+
+After `terraform apply`, open the ALB URL in your browser:
+
+- `alb_dns_name` output → `http://<alb_dns_name>`
+
+Expected response from the EC2 instances:
+`OK: aws-secure-vpc-terraform-dev`
