@@ -72,6 +72,7 @@ Route tables and subnet associations
 Remote state stored in S3 with DynamoDB locking
 
 🗂️ Repository Structure
+
 aws-secure-vpc-terraform/
 ├── backend/
 │   └── bootstrap/        # Creates S3 + DynamoDB for remote state
