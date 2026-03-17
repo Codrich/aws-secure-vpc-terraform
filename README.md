@@ -31,13 +31,29 @@ Implementing remote state and team-safe workflows
 
 Monitoring systems using CloudWatch
 
-## 🏗️ Architecture Diagram
+🏗️ Architecture Diagram
 
 ![Architecture](doc/architecture.png)
 
 ---
 
-## 📌 Project Overview
+📌 Project Overview
+
+This project demonstrates how to build a secure, scalable, production-ready AWS networking foundation using Infrastructure as Code (Terraform).
+
+Each environment is fully isolated and includes:
+
+Dedicated VPC
+
+Public and private subnets
+
+Internet Gateway & NAT Gateway
+
+Route tables and subnet associations
+
+Remote state management
+
+🧠 Architecture Overview
 
 Each environment (dev, staging, prod) includes:
 
@@ -70,11 +86,13 @@ aws-secure-vpc-terraform/
 │   └── screenshots/
 │       └── ops-dashboard.png
 └── README.md
+
 🌍 Environments
 EnvironmentCIDR BlockPurpose
-dev	10.10.0.0/16	Development & testing
-staging	10.20.0.0/16	Pre-production
-prod	10.30.0.0/16	Production
+dev	     10.10.0.0/16	 Development & testing
+staging	 10.20.0.0/16	 Pre-production
+prod	   10.30.0.0/16	 Production
+
 🔐 Remote State & Locking
 
 Terraform state is stored remotely using:
