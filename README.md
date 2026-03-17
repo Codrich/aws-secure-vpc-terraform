@@ -6,7 +6,7 @@ Production-grade AWS networking infrastructure built using Terraform, featuring 
 
 ## 🏗️ Architecture Diagram
 
-![Architecture](docs/architecture.png)
+![Architecture](doc/architecture.png)
 
 ---
 
