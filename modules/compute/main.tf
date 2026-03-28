@@ -1,3 +1,6 @@
+############################################
+# AMI (Amazon Linux 2023)
+############################################
 data "aws_ami" "al2023" {
   most_recent = true
   owners      = ["amazon"]
@@ -8,6 +11,9 @@ data "aws_ami" "al2023" {
   }
 }
 
+############################################
+# LOCALS (User Data Script)
+############################################
 locals {
   user_data = <<-EOF
     #!/bin/bash
@@ -20,40 +26,62 @@ locals {
   EOF
 }
 
+############################################
+# LAUNCH TEMPLATE
+############################################
 resource "aws_launch_template" "app" {
   name_prefix   = "${var.name_prefix}-lt-"
   image_id      = data.aws_ami.al2023.id
-  instance_type = var.instance_type
+
+  # ✅ FORCE FREE TIER SAFE INSTANCE
+  instance_type = "t3.micro"
 
   iam_instance_profile {
     name = var.ec2_instance_profile_name
   }
 
   vpc_security_group_ids = [var.app_sg_id]
-  user_data              = base64encode(local.user_data)
+
+  user_data = base64encode(local.user_data)
 
   metadata_options {
     http_endpoint               = "enabled"
     http_tokens                 = "required" # IMDSv2 enforced
     http_put_response_hop_limit = 2
   }
+
+  # ✅ ENABLE MONITORING (GOOD PRACTICE)
+  monitoring {
+    enabled = true
+  }
 }
 
+############################################
+# AUTO SCALING GROUP
+############################################
 resource "aws_autoscaling_group" "app" {
   name                = "${var.name_prefix}-asg-app"
-  min_size            = var.asg_min
-  max_size            = var.asg_max
-  desired_capacity    = var.asg_min
+  min_size            = 1
+  max_size            = 1
+  desired_capacity    = 1
+
   vpc_zone_identifier = var.private_subnet_ids
 
   launch_template {
     id      = aws_launch_template.app.id
     version = "$Latest"
   }
+
   target_group_arns = var.target_group_arns
 
-  health_check_type         = "EC2"
-  health_check_grace_period = 60
+  # ✅ USE ALB HEALTH CHECK (IMPORTANT)
+  health_check_type         = "ELB"
+  health_check_grace_period = 120
+
+  # ✅ PREVENT DESTROY BEFORE CREATE ISSUES
+  lifecycle {
+    create_before_destroy = true
+  }
 
   tag {
     key                 = "Name"
@@ -62,6 +90,9 @@ resource "aws_autoscaling_group" "app" {
   }
 }
 
+############################################
+# CLOUDWATCH ALARM
+############################################
 resource "aws_cloudwatch_metric_alarm" "cpu_high" {
   alarm_name          = "${var.name_prefix}-cpu-high"
   comparison_operator = "GreaterThanThreshold"
