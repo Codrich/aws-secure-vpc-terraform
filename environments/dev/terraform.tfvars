@@ -5,3 +5,4 @@ environment  = "dev"
 
 asg_min = 1
 asg_max = 1
+dev_domain_name = "dev.mertmart.com"
