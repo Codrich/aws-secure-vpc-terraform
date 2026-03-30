@@ -13,6 +13,10 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: environments/dev   # 🔥 SET ONCE (cleaner)
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,7 +40,7 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -var-file=environments/dev/terraform.tfvars
+        run: terraform plan -var-file=terraform.tfvars
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var-file=environments/dev/terraform.tfvars
+        run: terraform apply -auto-approve -var-file=terraform.tfvars
