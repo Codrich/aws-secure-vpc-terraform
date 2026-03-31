@@ -47,7 +47,6 @@ steps:
 ```
 
 terraform-apply:
-needs: terraform-plan
 if: github.ref == 'refs/heads/main'
 runs-on: ubuntu-latest
 
