@@ -233,6 +233,10 @@ terraform plan
 
 ---
 
+<!-- test apply pipeline -->
+
+---
+
 ## ⭐ Author
 
 **Rich**
