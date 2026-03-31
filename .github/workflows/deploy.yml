@@ -62,24 +62,26 @@ jobs:
           sarif_file: results.sarif
 
   tfsec:
-  name: tfsec Scan
-  runs-on: ubuntu-latest
-  permissions:
-    contents: read
-    security-events: write
+    name: tfsec Scan
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
-  steps:
-    - uses: actions/checkout@v5
+    steps:
+      - uses: actions/checkout@v5
 
-    - uses: aquasecurity/tfsec-action@v1.0.0
-      with:
-        working_directory: environments/dev
-        format: sarif
-        additional_args: --out tfsec.sarif --soft-fail=false
+      - name: Run tfsec
+        uses: aquasecurity/tfsec-action@v1.0.0
+        with:
+          working_directory: environments/dev
+          format: sarif
+          additional_args: --out tfsec.sarif --soft-fail=false
 
-    - uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: tfsec.sarif
+      - name: Upload SARIF
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: tfsec.sarif
 
   terraform-plan:
     name: Terraform Plan
