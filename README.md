@@ -1,11 +1,11 @@
 <!-- FORCE TEXT CHANGE -->
-# 🚀 Secure AWS ECS Fargate Platform
+# Secure AWS ECS Fargate Platform
 
 **Terraform + CI/CD + DevSecOps + Observability**
 
 ---
 
-## 📌 Overview
+## Overview
 
 This project demonstrates a **production-style cloud platform** designed to deploy and operate containerized applications securely and at scale on AWS.
 
@@ -18,7 +18,7 @@ It simulates a real-world environment where:
 
 ---
 
-## 🎯 Why This Project Matters
+## Why This Project Matters
 
 Modern cloud engineering is not just about deploying apps — it's about:
 
@@ -31,21 +31,21 @@ This project reflects how real companies deploy services in AWS.
 
 ---
 
-## 🏗️ Architecture Diagram
+## Architecture Diagram
 
 ![Architecture](docs/architecture.png)
 
 ---
 
-## 🧠 Architecture Deep Dive
+## Architecture Deep Dive
 
-### 🌐 Networking
+### Networking
 
 * Custom **VPC** with public and private subnets
 * **Public Subnet** → Application Load Balancer (ALB)
 * **Private Subnet** → ECS Fargate tasks (no direct internet exposure)
 
-### ⚖️ Load Balancing
+### Load Balancing
 
 * **Application Load Balancer (ALB)**
 
@@ -53,7 +53,7 @@ This project reflects how real companies deploy services in AWS.
   * TLS termination
   * Routes traffic to ECS service
 
-### 🐳 Compute Layer
+### Compute Layer
 
 * **ECS Fargate**
 
@@ -61,14 +61,14 @@ This project reflects how real companies deploy services in AWS.
   * Runs Flask app in isolated tasks
   * Auto-integrated with ALB target group
 
-### 📦 Container Registry
+### Container Registry
 
 * **Amazon ECR**
 
   * Stores Docker images
   * Version-controlled deployments
 
-### 🌍 DNS
+### DNS
 
 * **Route 53**
 
@@ -91,7 +91,7 @@ This project reflects how real companies deploy services in AWS.
 
 ---
 
-## 🔄 CI/CD Pipeline (End-to-End)
+## CI/CD Pipeline (End-to-End)
 
 1. Developer pushes code to GitHub
 2. GitHub Actions:
@@ -102,11 +102,11 @@ This project reflects how real companies deploy services in AWS.
 4. ECS service pulls latest image
 5. New task revision deployed automatically
 
-👉 Result: **Fully automated deployments (zero manual steps)**
+ Result: **Fully automated deployments (zero manual steps)**
 
 ---
 
-## 🔐 Security (DevSecOps)
+## Security (DevSecOps)
 
 ### Identity & Access
 
@@ -148,11 +148,11 @@ This project reflects how real companies deploy services in AWS.
   * High CPU usage
   * Service health issues
 
-👉 Enables real-time monitoring and alerting
+Enables real-time monitoring and alerting
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### 1. Clone Repository
 
@@ -175,7 +175,7 @@ terraform apply -var-file=environments/dev/terraform.tfvars
 
 ---
 
-## 🧪 Application
+## Application
 
 Flask app running in ECS Fargate:
 
@@ -190,21 +190,21 @@ Accessible via:
 
 ---
 
-## 🧯 Troubleshooting
+## Troubleshooting
 
-### ❌ ECS Task Not Starting
+### ECS Task Not Starting
 
 * Check CloudWatch Logs
 * Verify IAM permissions
 * Confirm container port mapping
 
-### ❌ ALB Not Routing Traffic
+### ALB Not Routing Traffic
 
 * Check target group health
 * Verify security groups
 * Confirm HTTPS listener
 
-### ❌ Terraform Errors
+### Terraform Errors
 
 ```bash
 terraform init -reconfigure
@@ -214,7 +214,7 @@ terraform plan
 
 ---
 
-## 📈 Future Improvements
+## Future Improvements
 
 * GitOps (ArgoCD / Flux)
 * Multi-environment (dev/stage/prod)
@@ -224,7 +224,7 @@ terraform plan
 
 ---
 
-## 🧠 Key Learnings
+## Key Learnings
 
 * Designing secure AWS architectures
 * Implementing CI/CD pipelines
@@ -244,7 +244,7 @@ terraform plan
 
 ---
 
-## ⭐ Author
+## Author
 
 **Rich**
 Cloud / DevSecOps Engineer
